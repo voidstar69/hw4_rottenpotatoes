@@ -7,6 +7,10 @@ class MoviesController < ApplicationController
   end
 
   def index
+    #if params[:must_flash]
+    #  flash[:notice] = "foo!"
+    #end
+    
     sort = params[:sort] || session[:sort]
     case sort
     when 'title'
@@ -60,4 +64,16 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def match_director
+    @movie = Movie.find params[:id]
+    
+    if @movie.director == nil
+      @similar_movies = []
+      flash[:notice] = "'#{@movie.title}' has no director info"
+      redirect_to movies_path, :status => :found
+    else
+      @similar_movies = Movie.where(:director => @movie.director)
+      #@similar_movies = @movie.find_movies_with_same_director
+    end
+  end
 end

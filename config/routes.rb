@@ -14,6 +14,8 @@ Rottenpotatoes::Application.routes.draw do
   #   resources :products
   resources :movies
 
+  match 'movies/:id/match_director' => 'movies#match_director'
+
   # Sample resource route with options:
   #   resources :products do
   #     member do
