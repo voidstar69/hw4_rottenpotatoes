@@ -1,0 +1,11 @@
+%h2 Similar Movies to '#{@movie.title}'
+
+%h2 Movies by director '#{@movie.director}'
+
+-# = if @movie.title.empty?
+-# %h3 '#{@movie.title}' has no director info 
+  
+%ul#details
+  - @similar_movies.each do |movie|
+    %li
+      = movie.title
